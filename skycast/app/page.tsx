@@ -11,8 +11,8 @@ export default function Page() {
       <h1>Austria</h1>
       <div className='flex flex-row'>
       {cities.map((city, index) => (
-        <div className='pr-6'>
-        <CityBox key={index} city={city} />
+        <div key={index} className='pr-6'>
+        <CityBox city={city} />
         </div>
       ))}
       </div>

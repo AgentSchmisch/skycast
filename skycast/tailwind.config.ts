@@ -26,6 +26,9 @@ const config: Config = {
           600: '#2F6FEB',
         },
       },
+      fontFamily: {
+        'sans': ['Montserrat', 'Arial', 'sans-serif'],
+      },
     },
     keyframes: {
       shimmer: {

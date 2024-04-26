@@ -18,11 +18,11 @@ export default function Page() {
         <div className='flex flex-col w-3/4'>
         
         <div className="flex flex-row justify-between items-center">
-        <h1 className="text-xl font-bold text-[#284B63]">Our Weather Prediction</h1>
+        <h1 className="text-xl font-bold text-skycast-CarribeanCurrent">Our Weather Prediction</h1>
         <SearchBar/>
         </div>
 
-        <h2 className='font-bold py-2 text-lg text-[#284B63]'>Austria</h2>
+        <h2 className='font-bold py-2 text-lg text-skycast-CarribeanCurrent'>Austria</h2>
           <CityBox cities={cities} />
         </div>
       </div>

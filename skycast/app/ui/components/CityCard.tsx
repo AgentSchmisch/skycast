@@ -1,4 +1,4 @@
-export default function CityCard({ city }) {
+export default function CityCard({ city } : { city: string }) {
     return (
         <div className="border rounded-xl">
             <img className="rounded-t-xl" src="/img/vienna.jpg" alt={`Hero card image of ${city}`} />

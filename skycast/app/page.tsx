@@ -1,5 +1,3 @@
-import AcmeLogo from '@/app/ui/acme-logo';
-import { ArrowRightIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import React from 'react';
 import SearchBar from '@/app/ui/components/SearchBar';
@@ -17,18 +15,18 @@ export default function Page() {
       <NavBar activePage="index" />
 
       <div className=' relative flex flex-col items-center m-4'>
-      <FeatureContainer />
+        <FeatureContainer />
       </div>
 
       <div className='relative flex flex-col items-center m-16'>
         <div className='flex flex-col w-3/4'>
         <div className="flex flex-row justify-between items-center">
-        <h1 className="text-xl font-bold text-skycast-IndigoDye">Our Weather Prediction</h1>
-        <SearchBar/>
+          <h1 className="text-xl font-bold text-skycast-IndigoDye">Our Weather Prediction</h1>
+          <SearchBar/>
         </div>
 
         <h2 className='font-bold py-2 text-lg text-skycast-IndigoDye'>Austria</h2>
-          <CityBox cities={cities} />
+        <CityBox cities={cities} />
         </div>
       </div>
     </main>

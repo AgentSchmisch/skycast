@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCloudSun } from '@fortawesome/free-solid-svg-icons';
 
-export default function NavBar({activePage}){
+export default function NavBar({ activePage } : {activePage: string}){
     return (
         <nav className="fixed top-0 left-0 right-0 z-50 flex flex-row justify-between items-center p-6 text-white">
         <div className='border-4 border-skycast-white rounded-full'>

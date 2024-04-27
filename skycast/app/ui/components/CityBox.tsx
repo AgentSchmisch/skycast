@@ -1,6 +1,6 @@
 import CityCard from '@/app/ui/components/CityCard';
 
-export default function CityBox({cities}) {
+export default function CityBox({cities} : {cities: string[]}) {
 
     return (
         <div>

@@ -2,16 +2,18 @@ import Link from 'next/link';
 import React from 'react';
 import SearchBar from '@/app/ui/components/SearchBar';
 import NavBar from './ui/components/NavBar';
-import HeroImage from './ui/components/HeroImage';
+// import HeroImage from './ui/components/HeroImage';
 import CityBox from './ui/components/CityBox';
 import FeatureContainer from './ui/components/FeatureContainer';
+import LandingBanner from './ui/components/LandingBanner';
 
 export default function Page() {
-  const cities = ["Vienna", "Linz", "Graz", "St. Pölten", "Salzburg", "Innsbruck"];
+  const cities_austria = ["Vienna", "Linz", "Graz", "St. Pölten", "Salzburg", "Innsbruck"];
+  const cities_germany = ["Munich", "Hamburg", "Berlin", "Dresden", "Cologne", "Innsbruck"];
 
   return (
     <main className="flex flex-col">
-      <HeroImage />
+      <LandingBanner />
       <NavBar activePage="index" />
 
       <div className=' relative flex flex-col items-center m-4'>
@@ -25,8 +27,16 @@ export default function Page() {
           <SearchBar/>
         </div>
 
-        <h2 className='font-bold py-2 text-lg text-skycast-IndigoDye'>Austria</h2>
-        <CityBox cities={cities} />
+        <div>
+        <h2 className='font-bold py-2 text-lg text-skycast-IndigoDye'> Austria </h2>
+        <CityBox cities={cities_austria} />
+        </div>
+
+        <div>
+        <h2 className='font-bold py-2 text-lg text-skycast-IndigoDye'> Germany </h2>
+        <CityBox cities={cities_germany} />
+        </div>
+
         </div>
       </div>
     </main>

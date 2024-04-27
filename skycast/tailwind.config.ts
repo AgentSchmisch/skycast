@@ -29,6 +29,9 @@ const config: Config = {
       fontFamily: {
         'sans': ['Montserrat', 'Arial', 'sans-serif'],
       },
+      brightness: {
+        30: 'brightness(0.3)',
+      },
     },
     keyframes: {
       shimmer: {

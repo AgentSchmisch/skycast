@@ -7,7 +7,7 @@ export default function HeroImage() {
             alt="Hero image of the city"
             height={7360}
             width={4920}
-            className="inset-0 object-cover h-[40rem]"
+            className="inset-0 object-cover h-[40rem] brightness-[.6] filter"
         />
     );
 }

@@ -16,7 +16,7 @@ export default function SearchBar({setResult} : {setResult: any}) {
         else{
             // fetch the search results from openweather api
             console.log("searching for: ", searchText)
-            fetch(`https://api.openweathermap.org/data/2.5/weather?q=${searchText}&appid=${process.env.OPENWEATHER_API_KEY}`)
+            fetch(`https://api.openweathermap.org/data/2.5/weather?q=${searchText}&appid=${process.env.NEXT_PUBLIC_OPENWEATHER_API_KEY}`)
             .then(response => response.json())
             .then(data => {
                 console.log(data)
@@ -30,7 +30,7 @@ export default function SearchBar({setResult} : {setResult: any}) {
 
     return (
             <form onSubmit={handleSearch} className="flex justify-center">
-                <input className="font-bold border rounded-full" value={searchText} placeholder="Search your city..." onChange={(e) => setSearchTerm(e.target.value)}/>
+                <input className="font-bold border rounded-full" value={searchText ?? ""} placeholder="Search your city..." onChange={(e) => setSearchTerm(e.target.value)}/>
             </form>
     )
 }

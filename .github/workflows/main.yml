@@ -1,0 +1,18 @@
+name: Clone Repository
+
+on:
+  schedule:
+    - cron: '*/15 * * * *'  # Runs every 15 minutes
+
+jobs:
+  clone:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Clone repository
+      uses: actions/checkout@v2
+      with:
+        repository: "https://git.nwt.fhstp.ac.at/cc231067/fwoc-weather-app.git"  # Full GitLab repository URL
+        token: ${{ secrets.GITLAB_ACCESS_TOKEN }}  # Replace with your GitLab personal access token secret name
+        fetch-depth: 0  # This ensures the complete history is cloned
+        ref: main  # Replace with the branch name you want to clone

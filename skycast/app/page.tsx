@@ -19,7 +19,7 @@ export default function Page() {
   return (
     <main className="flex flex-col">
       <LandingBanner />
-      <NavBar activePage="index" />
+      <NavBar />
 
       <div className=' relative flex flex-col items-center m-4'>
         <FeatureContainer />

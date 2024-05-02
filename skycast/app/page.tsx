@@ -1,5 +1,8 @@
+"use client";
 import Link from 'next/link';
+import { useState } from 'react';
 import React from 'react';
+
 import SearchBar from '@/app/ui/components/SearchBar';
 import NavBar from './ui/components/NavBar';
 // import HeroImage from './ui/components/HeroImage';
@@ -10,6 +13,8 @@ import LandingBanner from './ui/components/LandingBanner';
 export default function Page() {
   const cities_austria = ["Vienna", "Linz", "Graz", "St. Pölten", "Salzburg", "Innsbruck"];
   const cities_germany = ["Munich", "Hamburg", "Berlin", "Dresden", "Cologne", "Innsbruck"];
+
+  const [result, setResult] = useState("");
 
   return (
     <main className="flex flex-col">
@@ -24,7 +29,7 @@ export default function Page() {
         <div className='flex flex-col w-3/4'>
         <div className="flex flex-row justify-between items-center">
           <h1 className="text-xl font-bold text-skycast-IndigoDye">Our Weather Prediction</h1>
-          <SearchBar/>
+          <SearchBar setResult={setResult}/>
         </div>
 
         <div>

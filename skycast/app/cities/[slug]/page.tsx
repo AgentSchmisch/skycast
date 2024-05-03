@@ -12,7 +12,7 @@ export default function Page( { params }: { params: { slug: string } }) {
   
   return (
     <main className="flex flex-col">
-        <NavBar activePage="cities" />
+        <NavBar />
         <HeroImage path="/img/banner.jpg" />
         <p>This is the city detail page for { decodeURI(params.slug) }</p>
     </main>

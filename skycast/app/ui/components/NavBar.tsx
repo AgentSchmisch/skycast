@@ -28,17 +28,13 @@ export default function NavBar({target}: {target: HTMLElement | null}) {
         const totalHeight = element.clientHeight - window.innerHeight;
         const windowScrollTop = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop;
         // if the user has not scrolled
-        if(windowScrollTop === 0){
+        console.log(windowScrollTop)
+        if(windowScrollTop > 640){
+            return setReadingProgress(0.6)
+        }
+        if (windowScrollTop < 640 && windowScrollTop > 0) {
             return setReadingProgress(0)
         }
-
-        // if the user has scrolled to the bottom of the page
-        if (windowScrollTop >= totalHeight) {
-            return setReadingProgress(1)
-        }
-        //TODO: check that thhe value is between 0 and 0.8 and apply the opacity that way
-        setReadingProgress(windowScrollTop / totalHeight);
-
     }, [target])
 
     useEffect(() => {
@@ -51,7 +47,7 @@ export default function NavBar({target}: {target: HTMLElement | null}) {
 
     return (
         // TODO: fix the percentage of the reading progress
-        <nav style={{backgroundColor:`rgba(125,125,125,${readingProgress})`}} className="fixed top-0 left-0 right-0 z-50 flex flex-row justify-between items-center p-6 text-white">
+        <nav style={{backgroundColor:`rgba(40, 75, 99, ${readingProgress})`}} className="fixed top-0 left-0 right-0 z-50 flex flex-row justify-between items-center p-2 text-white">
             <a href="/">
                 <div className='border-4 border-skycast-white rounded-full'>
                     <FontAwesomeIcon className='h-8 text-skycast-white p-4' icon={faCloudSun} />

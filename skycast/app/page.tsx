@@ -1,6 +1,6 @@
 "use client";
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import React from 'react';
 
 import SearchBar from '@/app/ui/components/SearchBar';
@@ -20,11 +20,14 @@ export default function Page() {
   const cities_germany = ["Munich", "Hamburg", "Berlin", "Dresden", "Cologne"];
 
   const [result, setResult] = useState("");
+  
+  // content inside <> assures type safety, thus only accepting HTMLElement or null
+  const mainRef = useRef<HTMLElement|null>(null)
 
   return (
-    <main className="flex flex-col">
+    <main className="flex flex-col" ref={mainRef}>
       <LandingBanner />
-      <NavBar />
+      <NavBar target={mainRef} />
 
       <div className=' relative flex flex-col items-center m-4'>
         <FeatureContainer />

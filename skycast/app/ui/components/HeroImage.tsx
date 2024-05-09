@@ -2,8 +2,10 @@ import Image from 'next/image';
 
 export default function HeroImage({path} : {path: string}) {
     return (
+        //<img src={path} alt="" />
+        
         <Image
-            src={ path }
+            src= { path }
             alt="Hero image of the city"
             height={7360}
             width={4920}

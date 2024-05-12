@@ -1,16 +1,20 @@
-![**Version**: 06-03-2023](https://img.shields.io/badge/version-26--04--2024-blueviolet?style=flat&logo=circle)
+![**Version**: 06-05-2023](https://img.shields.io/badge/version-06--05--2024-blueviolet?style=flat&logo=circle)
+
 <h1 align="center">🌤 Skycast</h1>
 
 ---
 
 ## 🧭 Contents
+
 * [🧭 Contents](#-contents)
 * [🎨 Colors](#-colors)
 * [🔀 Routing](#-routing)
 
 ---
 
-## 🎨 Colors
+## 🎨 Colors & Fonts 
+
+### Colors
 
 For the color palette we used `coolors.co`. The colors we settled on are
 
@@ -30,12 +34,19 @@ These colors are also added to the `tailwind.config.ts` file so they can be used
 <h3 className="text-lg font-semibold text-skycast-Jet">Easy to use</h3>
 ```
 
+
 ---
 
 ## 🔀 Routing
 
-```markdown
+The routing was done using the Nextjs builtin file system routing, the app provides following routes
 
 
+| route               | description                      |
+| :-------------------- | ---------------------------------- |
+| /                   | Landing page                     |
+| /cities             | List of all the available cities |
+| /cities/[city name] | One specific city                |
+| /fav                | user favourite list              |
 
-```
+---

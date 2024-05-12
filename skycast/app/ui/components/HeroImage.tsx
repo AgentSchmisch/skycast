@@ -1,12 +1,10 @@
 import Image from 'next/image';
 
-export default function HeroImage({path} : {path: string}) {
+export default function HeroImage({path, alt} : {path: string, alt: string}) {
     return (
-        //<img src={path} alt="" />
-        
         <Image
             src= { path }
-            alt="Hero image of the city"
+            alt={ alt }
             height={7360}
             width={4920}
             className="inset-0 object-cover h-[40rem] brightness-[.6] filter"

@@ -57,7 +57,7 @@ export default function NavBar({target}: {target: HTMLElement | null}) {
             <div className="flex flex-row items-center">
                 {
                     links.map((link) => (
-                        <a key={link.name} href={link.href} className= { clsx('pr-6', { 'font-bold underline': pathname.startsWith(link.href) })}>{link.name}</a>
+                        <a key={link.name} href={link.href} className= { clsx('pr-6', { 'font-bold underline': (pathname === (link.href)) })}>{link.name}</a>
                     ))
                 }
             </div>

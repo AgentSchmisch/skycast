@@ -21,13 +21,13 @@ export default function FavButton({ city }: { city: string }) {
         const storedLikedCities = localStorage.getItem('likedCities');
 
         if (storedLikedCities) {
-            const prevLikedCities = JSON.parse(storedLikedCities);
-            setLikedCities(prevLikedCities);
+            const likedCitiesRecent = JSON.parse(storedLikedCities);
+            setLikedCities(likedCitiesRecent);
 
-            const updatedIsLiked = !prevLikedCities.includes(city);
+            const updatedIsLiked = !likedCitiesRecent.includes(city);
             setCityIsLiked(updatedIsLiked);
 
-            let updatedLikedCities = [...prevLikedCities];
+            let updatedLikedCities = [...likedCitiesRecent];
 
             if (updatedIsLiked) {
                 updatedLikedCities.push(city);
@@ -39,6 +39,11 @@ export default function FavButton({ city }: { city: string }) {
             }
 
             localStorage.setItem('likedCities', JSON.stringify(updatedLikedCities));
+        } else {
+
+            setCityIsLiked(true);
+            localStorage.setItem('likedCities', JSON.stringify([city]));
+            setLikedCities([city]);
         }
     };
 

@@ -20,7 +20,7 @@ export default function NavBar({target}: {target: HTMLElement | null}) {
 
     const scrollListener = useCallback(()=> {
         // if the target element is not present
-        if(!target.current){
+        if(!target){
             return
         }
 

@@ -29,7 +29,7 @@ export default function Page() {
       <LandingBanner />
       <NavBar target={mainRef} />
 
-      <div className=' relative flex flex-col items-center m-4'>
+      <div className='relative flex flex-col items-center m-4'>
         <FeatureContainer />
       </div>
 

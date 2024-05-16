@@ -14,14 +14,12 @@ export default function Page({ params }: { params: { slug: string } }) {
     const [data, setData] = useState<any>(null);
     const [ImageData, setImageData] = useState<any>(null);
     const [prediction, setPrediction] = useState<any>(null);
-    const rand = Math.floor(Math.random() * 5);
 
     useEffect(() => {
         async function fetchWeatherData() {
             try {
                 const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${decodeURI(params.slug)}&appid=${process.env.NEXT_PUBLIC_OPENWEATHER_API_KEY}&units=metric`);
                 const responseData = await response.json();
-                console.log(responseData);
                 setData(responseData);
             } catch (error) {
                 console.error("Error:", error);
@@ -30,11 +28,31 @@ export default function Page({ params }: { params: { slug: string } }) {
 
         async function fetchPrediction() {
             try {
-                //api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key}
                 const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${decodeURI(params.slug)}&appid=${process.env.NEXT_PUBLIC_OPENWEATHER_API_KEY}&units=metric`);
                 const responseData = await response.json();
-                //TODO: group the prediction data by date, and reevaluate the prediction
-                setPrediction(responseData);
+                const grouped_prediction_object = [];
+                for (let i = 0; i < responseData.cnt; i++) {
+                    if (grouped_prediction_object[responseData.list[i].dt_txt.split(" ")[0]] === undefined) {
+                        grouped_prediction_object[responseData.list[i].dt_txt.split(" ")[0]] = [];
+                    }
+                    else {
+                        grouped_prediction_object[responseData.list[i].dt_txt.split(" ")[0]].push({ "temp": responseData.list[i].main.temp, "icon": responseData.list[i].weather[0].icon, "date": responseData.list[i].dt_txt.split(" ")[0] });
+                    }
+                }
+                const grouped_prediction_data = [];
+                for (let key in grouped_prediction_object) {
+                    // Get the average temperature for the day
+                    let temp = 0;
+                    for (let i = 0; i < grouped_prediction_object[key].length; i++) {
+                        temp += grouped_prediction_object[key][i].temp;
+                    }
+                    // round the temperature
+                    temp = Math.round(temp / grouped_prediction_object[key].length);
+                    //create an array from the data, so we can use the map function in the PredictionContainer
+                    grouped_prediction_data.push({ "date": key, "temp": temp, "icon": grouped_prediction_object[key][0].icon});
+                }
+
+                setPrediction(grouped_prediction_data);
             } catch (error) {
                 console.error("Error:", error);
             }
@@ -42,9 +60,9 @@ export default function Page({ params }: { params: { slug: string } }) {
         async function fetchHeroImage() {
             // Fetch hero image
             try {
+                //create a pexels api client
                 const client = createClient(process.env.NEXT_PUBLIC_PEXELS_API_KEY);
                 client.photos.search({ query: decodeURI(params.slug), per_page: 5, orientation: 'landscape' }).then(photos => {
-                    console.log(photos);
                     setImageData(photos);
                 }
                 );
@@ -55,32 +73,28 @@ export default function Page({ params }: { params: { slug: string } }) {
             }
         }
 
+        fetchPrediction();
         fetchHeroImage();
         fetchWeatherData();
-        fetchPrediction();
     }, [params.slug]);
 
     return (
         <main className="flex flex-col">
             {data && (
                 <>
-                <NavBar target={null} />
-                <div className="relative">
-                    <HeroImage path = {ImageData===null||ImageData===undefined ? "/img/banner.jpg" : ImageData.photos[rand].src.landscape} alt={ImageData===null||ImageData===undefined ?"Banner image":ImageData.photos[rand].alt} />
-                </div>
-                <div className="flex items-center justify-center relative">
-                <TemperatureBox temp={data.main.temp} min_temp={data.main.temp_min} max_temp={data.main.temp_max} city={params.slug} />
-                </div>
-                <div className="my-24">
-                    <HumidityWindspeed data={data} />
-                    <PredictionContainer data={prediction} />
-                    <p>This is the city detail page for {decodeURI(params.slug)}</p>
-                    <div>
-                        <p>Main: {data.weather[0].description}</p>
-                        <img src={`https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`} alt="" />
+                    <NavBar target={null} />
+                    <div className="relative">
+                        <HeroImage image={ImageData === null || ImageData === undefined ? "/img/banner.jpg" : ImageData.photos[Math.floor(Math.random() * ImageData.photos.length)]}/>
+                    </div>
+                    <div className="flex items-center justify-center relative">
+                        <TemperatureBox temp={data.main.temp} min_temp={data.main.temp_min} max_temp={data.main.temp_max} city={params.slug} />
+                    </div>
+                    <div className="my-24 flex flex-col items-center">
+                        <div className='w-2/3'>
+                            <HumidityWindspeed data={data} />
+                            <PredictionContainer data={prediction === null ? null : prediction} />
                         </div>
-                </div>
-                    {console.log(prediction)}
+                    </div>
                 </>
             )}
         </main>

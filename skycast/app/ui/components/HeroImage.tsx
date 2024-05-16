@@ -1,6 +1,19 @@
 import Image from 'next/image';
 
-export default function HeroImage({path, alt} : {path: string, alt: string}) {
+export default function HeroImage(image:any) {
+    let path = "";
+    let alt = "";
+    console.log(image)
+    if (image.path === "/img/banner.jpg"){
+        path = "/img/banner.jpg";
+        alt = "Banner Image";
+    }
+    else{
+        image = image.image
+        path = image.src.landscape;
+        alt = image.alt;
+    }
+    
     return (
         <Image
             src= { path }

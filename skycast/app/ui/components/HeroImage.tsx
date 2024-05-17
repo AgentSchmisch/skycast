@@ -3,12 +3,13 @@ import Image from 'next/image';
 export default function HeroImage(image:any) {
     let path = "";
     let alt = "";
-    console.log(image)
-    if (image.path === "/img/banner.jpg"){
+
+    if (image.image === "/img/banner.jpg"|| image === null || image === undefined){
         path = "/img/banner.jpg";
         alt = "Banner Image";
     }
-    else{
+
+    else {
         image = image.image
         path = image.src.landscape;
         alt = image.alt;

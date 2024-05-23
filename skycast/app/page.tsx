@@ -19,8 +19,8 @@ export default function Page() {
   const cities_austria = ["Vienna", "Linz", "Graz", "St. Pölten", "Salzburg", "Innsbruck"];
   const cities_germany = ["Munich", "Hamburg", "Berlin", "Dresden", "Cologne"];
 
-  const [result, setResult] = useState("");
-  
+    const [result, setResult] = useState("");
+
   // content inside <> assures type safety, thus only accepting HTMLElement or null
   const mainRef = useRef<HTMLElement|null>(null)
 

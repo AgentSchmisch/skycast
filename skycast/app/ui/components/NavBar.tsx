@@ -20,7 +20,7 @@ export default function NavBar({target}: {target: HTMLElement | null}) {
 
     const scrollListener = useCallback(()=> {
         // if the target element is not present
-        if(!target.current){
+        if(!target){
             return
         }
 
@@ -28,7 +28,6 @@ export default function NavBar({target}: {target: HTMLElement | null}) {
         const totalHeight = element.clientHeight - window.innerHeight;
         const windowScrollTop = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop;
         // if the user has not scrolled
-        console.log(windowScrollTop)
         if(windowScrollTop > 640){
             return setReadingProgress(0.6)
         }

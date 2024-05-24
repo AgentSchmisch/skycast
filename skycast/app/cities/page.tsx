@@ -8,7 +8,7 @@ export default function Page() {
     return (
         <main className="flex flex-col" ref={mainRef}>
             <LandingBanner />
-            <NavBar target={mainRef} />
+            <NavBar target={null} />
       <h1>This is the all cities page</h1>
     </main>
   );

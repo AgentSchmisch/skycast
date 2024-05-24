@@ -13,7 +13,7 @@ const links = [
     { name: 'Fav', href: '/fav' }
 ];
 
-export default function NavBar({target}: {target: HTMLElement | null}) {
+export default function NavBar({target}: {target: any}) {
     const pathname = usePathname();
 
     const[readingProgress, setReadingProgress] = useState(0)

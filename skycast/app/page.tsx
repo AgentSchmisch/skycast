@@ -1,6 +1,6 @@
 "use client";
 import Link from 'next/link';
-import { useState, useRef } from 'react';
+import { useState, useRef, MutableRefObject } from 'react';
 import React from 'react';
 
 import SearchBar from '@/app/ui/components/SearchBar';
@@ -21,8 +21,8 @@ export default function Page() {
 
   const [result, setResult] = useState("");
   
-  // content inside <> assures type safety, thus only accepting HTMLElement or null
-  const mainRef = useRef<HTMLElement|null>(null)
+  // content inside <> assures type safety, thus only accepting an HTMLElement or null
+  const mainRef = useRef<any>(null)
 
   return (
     <main className="flex flex-col" ref={mainRef}>

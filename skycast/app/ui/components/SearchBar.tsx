@@ -8,11 +8,10 @@ export default function SearchBar({setResult} : {setResult: any}) {
     const router = useRouter()
 
 
-    const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleSearch = (event: any) => {
         event.preventDefault();
         setSearchTerm(event.target.value);
 
-        let results = []
         
         //check if there is a text in the search bar
         if (searchText == "") {

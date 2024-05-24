@@ -30,7 +30,7 @@ export default function Page({ params }: { params: { slug: string } }) {
             try {
                 const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${decodeURI(params.slug)}&appid=${process.env.NEXT_PUBLIC_OPENWEATHER_API_KEY}&units=metric`);
                 const responseData = await response.json();
-                const grouped_prediction_object = [];
+                const grouped_prediction_object : any[] = [];
                 for (let i = 0; i < responseData.cnt; i++) {
                     if (grouped_prediction_object[responseData.list[i].dt_txt.split(" ")[0]] === undefined) {
                         grouped_prediction_object[responseData.list[i].dt_txt.split(" ")[0]] = [];
@@ -61,7 +61,8 @@ export default function Page({ params }: { params: { slug: string } }) {
             // Fetch hero image
             try {
                 //create a pexels api client
-                const client = createClient(process.env.NEXT_PUBLIC_PEXELS_API_KEY);
+                const api_key:any = process.env.NEXT_PUBLIC_PEXELS_API_KEY
+                const client = createClient(api_key);
                 client.photos.search({ query: decodeURI(params.slug), per_page: 5, orientation: 'landscape' }).then(photos => {
                     setImageData(photos);
                 }

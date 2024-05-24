@@ -22,7 +22,7 @@ export default function CityBox({cities} : {cities: string[]} ) {
                                 <div className='p-2 drop-shadow-xl'>
                                     <CityCard city={cities[index + 2]}/>
                                 </div>
-                            )}x
+                            )}
                         </div>
                     ) : null
                 ))

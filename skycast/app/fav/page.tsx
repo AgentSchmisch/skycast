@@ -14,8 +14,8 @@ export default function Page() {
           <NavBar target={mainRef}/>
           <HeroImage path="/img/banner.jpg"/>
           <h1>This is the Liked Cities page</h1>
-          <FavCityCard />
           <EmbeddingURL />
+          <FavCityCard />
       </main>
   );
 }

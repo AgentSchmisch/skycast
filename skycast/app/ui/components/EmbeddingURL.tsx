@@ -1,6 +1,8 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useState } from "react";
 export default function EmbeddingURL() {
     const [url, setUrl] = useState("");
+    const [copySuccess, setCopySuccess] = useState("");
+
     useEffect(() => {
         const port = window.location.port || 3000;
         const storedLikedCities = localStorage.getItem('likedCities');
@@ -11,21 +13,32 @@ export default function EmbeddingURL() {
         }
 
 
-    }, [url]);
+    }, []);
 
-    function handleButtonClick() {
-        console.log("Liked Cities from URL:", url);
+    const handleCopyClick = () => {
+        if (url) {
+            navigator.clipboard.writeText(url)
+                .then(() => {
+                    setCopySuccess("URL successfully copied!");
+                    setTimeout(() => setCopySuccess(""), 5000);
+                })
+                .catch((err) => {
+                    setCopySuccess("Failed to copy URL");
+                    setTimeout(() => setCopySuccess(""), 5000);
+                });
+        }
+    };
 
-    }
-
-        return (
-            <div className="relative">
-                <input type="text" name="output" placeholder={"URL"}></input>
-                <button className="absolute top-0 right-0 mt-4 mr-4 md:h-6 text-white bg-blue-500 p-2 rounded" onClick={handleButtonClick}>
-                    Click to create URL
-                </button>
-            </div>
-);
+    return (
+        <div className="relative flex items-center justify-end">
+            {copySuccess && (
+                <div className=" mr-5 text-green-500">{copySuccess}</div>
+            )}
+            <button onClick={handleCopyClick} className="mt-2 mr-10 p-2 bg-blue-500 text-white rounded">
+                Copy URL
+            </button>
+        </div>
+    );
 
 }
 

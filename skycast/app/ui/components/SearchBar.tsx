@@ -1,36 +1,42 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 export default function SearchBar({setResult} : {setResult: any}) {
     const [searchText, setSearchTerm] = useState<string>("");
+    const router = useRouter()
 
-    const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+
+    const handleSearch = (event: any) => {
         event.preventDefault();
         setSearchTerm(event.target.value);
 
-        let results = []
         
         //check if there is a text in the search bar
         if (searchText == "") {
             //show default results
         }
+
         else{
-            // fetch the search results from openweather api
-            console.log("searching for: ", searchText)
-            fetch(`https://api.openweathermap.org/data/2.5/weather?q=${searchText}&appid=${process.env.NEXT_PUBLIC_OPENWEATHER_API_KEY}`)
-            .then(response => response.json())
-            .then(data => {
-                console.log(data)
-                setResult(data)
-            })
-            .catch(error => {
-                console.log("Error: ", error)
-            })
+            //redirect to the search result page
+            router.push(`/cities/${encodeURIComponent(searchText)}`)
         }
     }
 
     return (
             <form onSubmit={handleSearch} className="flex justify-center">
-                <input className="font-bold border rounded-full" value={searchText ?? ""} placeholder="Search your city..." onChange={(e) => setSearchTerm(e.target.value)}/>
-            </form>
+            <div className="relative">
+                <span className="absolute inset-y-0 left-0 flex items-center pl-3">
+                    <FontAwesomeIcon icon={faSearch}/>
+                </span>
+                <input 
+                    className="pl-10 pr-4 py-2 w-full border border-gray-300 rounded-full focus:outline-none focus:border-blue-500" 
+                    value={searchText ?? ""} 
+                    placeholder="Search your city..." 
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                />
+            </div>
+                        </form>
     )
 }

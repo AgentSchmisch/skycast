@@ -8,11 +8,10 @@ import EmbeddingURL from "@/app/ui/components/EmbeddingURL";
 
 
 export default function Page() {
-    const mainRef = useRef<HTMLElement|null>(null)
   return (
-      <main className="flex flex-col" ref={mainRef}>
-          <NavBar target={mainRef}/>
-          <HeroImage path="/img/banner.jpg"/>
+      <main className="flex flex-col">
+          <NavBar target={null}/>
+          <HeroImage image="/img/banner.jpg"/>
           <h1>This is the Liked Cities page</h1>
           <EmbeddingURL />
           <FavCityCard />

@@ -15,6 +15,7 @@ export default function Page({ params }: { params: { slug: string } }) {
     const [ImageData, setImageData] = useState<any>(null);
     const [prediction, setPrediction] = useState<any>(null);
 
+
     useEffect(() => {
         async function fetchWeatherData() {
             try {
@@ -88,7 +89,7 @@ export default function Page({ params }: { params: { slug: string } }) {
                         <HeroImage image={ImageData === null || ImageData === undefined ? "/img/banner.jpg" : ImageData.photos[Math.floor(Math.random() * ImageData.photos.length)]}/>
                     </div>
                     <div className="flex items-center justify-center relative">
-                        <TemperatureBox temp={data.main.temp} min_temp={data.main.temp_min} max_temp={data.main.temp_max} city={decodeURI(params.slug)} />
+                        <TemperatureBox temp={data.main.temp} min_temp={data.main.temp_min} max_temp={data.main.temp_max} city={data.name} />
                     </div>
                     <div className="my-24 flex flex-col items-center">
                         <div className='w-2/3'>

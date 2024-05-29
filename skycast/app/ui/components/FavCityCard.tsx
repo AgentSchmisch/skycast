@@ -1,27 +1,31 @@
+"use client"
 import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons";
 
 export default function FavCityCard(urlParam: any) {
-    urlParam = urlParam.urlParam;
     const [cities, setCities] = useState<string[]>([]);
 
 
     useEffect(() => {
         //parse the url parameters to get the liked cities from an embedded url
-        if (urlParam.has("likedCities")) {
+        if (urlParam != undefined) {
+            try{
+            urlParam = urlParam.urlParam
             //parse the liked cities from the url
-            const likedCities = JSON.parse(decodeURIComponent(urlParam.get("likedCities")));
-            console.log(likedCities);
+            const likedCities = JSON.parse(urlParam.likedCities);
 
             //parse the liked cities from the localstorage
             let storageItems:any = localStorage.getItem("likedCities")
+
             if (storageItems) {
                 storageItems = JSON.parse(storageItems)
             }
+
             else {
                 storageItems = []
             }
+
             for (let city of likedCities) {
                 if (!storageItems.includes(city)) {
                     storageItems.push(city)
@@ -29,6 +33,12 @@ export default function FavCityCard(urlParam: any) {
             }
             localStorage.setItem('likedCities', JSON.stringify(storageItems));
             setCities(storageItems);
+        }
+
+        catch{
+            console.log("error")
+        }
+
         }
     },[]);
 

@@ -1,3 +1,4 @@
+"use client"
 import HeroImage from "@/app/ui/components/HeroImage";
 
 export default function FavBanner() {

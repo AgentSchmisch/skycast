@@ -3,14 +3,14 @@ import {useState} from "react";
 
 export default function CityCard({city} : {city: string}) {
 
-
+    // due to the main page only containing curated cities, we can make sure we have the images on the server and dont need an api call
     return (
         <div className="border rounded-xl">
-            <img className="rounded-t-xl" src="/img/vienna.jpg" alt={`Hero card image of ${city}`} />
+            <img className="rounded-t-xl" src={`/img/${city.toLowerCase()}.jpg`} alt={`Hero card image of ${city}`} />
             <div className="flex justify-center bg-skycast-white rounded-b-xl">
 
-                <FavButton city={city}/>
-                <a href={`/cities/${city}`} className="p-6 font-bold">{city}</a>
+            <FavButton city={city}/>
+            <a href={`/cities/${city}`} className="p-6 font-bold">{city}</a>
             </div>
         </div>
     )

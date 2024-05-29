@@ -3,7 +3,7 @@ import { useRouter } from 'next/navigation';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
-export default function SearchBar({ setResult }: { setResult: any }) {
+export default function CitiesSearchbar({ setResult }: { setResult: any }) {
     const [searchText, setSearchTerm] = useState<string>("");
     const router = useRouter()
 
@@ -26,7 +26,7 @@ export default function SearchBar({ setResult }: { setResult: any }) {
 
         return (
             <form onSubmit={handleSearch} className="flex justify-center">
-                <div className="relative">
+                <div className="relative w-2/3 mt-8">
                     <span className="absolute inset-y-0 left-0 flex items-center pl-3">
                         <FontAwesomeIcon icon={faSearch} />
                     </span>

@@ -1,9 +1,36 @@
 import { useState, useEffect } from "react";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faHeart as solidHeart} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons";
 
-export default function FavCityCard() {
+export default function FavCityCard(urlParam: any) {
+    urlParam = urlParam.urlParam;
     const [cities, setCities] = useState<string[]>([]);
+
+
+    useEffect(() => {
+        //parse the url parameters to get the liked cities from an embedded url
+        if (urlParam.has("likedCities")) {
+            //parse the liked cities from the url
+            const likedCities = JSON.parse(decodeURIComponent(urlParam.get("likedCities")));
+            console.log(likedCities);
+
+            //parse the liked cities from the localstorage
+            let storageItems:any = localStorage.getItem("likedCities")
+            if (storageItems) {
+                storageItems = JSON.parse(storageItems)
+            }
+            else {
+                storageItems = []
+            }
+            for (let city of likedCities) {
+                if (!storageItems.includes(city)) {
+                    storageItems.push(city)
+                }
+            }
+            localStorage.setItem('likedCities', JSON.stringify(storageItems));
+            setCities(storageItems);
+        }
+    },[]);
 
     useEffect(() => {
         const storedLikedCities = localStorage.getItem('likedCities');
@@ -19,12 +46,12 @@ export default function FavCityCard() {
                 <a key={index} href={`/cities/${city}`} className="rounded-full bg-gray-200 relative w-full md:w-1/2 lg:w-1/3 xl:w-1/4 mx-10 my-5">
                     <div className="flex items-center">
                         <div>
-                            <img className="h-16 rounded-full" src="/img/vienna.jpg"
-                                 alt={`Hero card image of ${city}`}/>
+                            <img className="h-16 rounded-full" src={`/img/${city.toLowerCase()}.jpg`}
+                                alt={`Hero card image of ${city}`} />
                         </div>
                         <div className="p-4">{city}</div>
                     </div>
-                    <FontAwesomeIcon icon={solidHeart} size="2x" className="absolute top-1/2 transform -translate-y-1/2 right-4"/>
+                    <FontAwesomeIcon icon={solidHeart} size="2x" className="absolute top-1/2 transform -translate-y-1/2 right-4" />
                 </a>
             ))}
         </div>

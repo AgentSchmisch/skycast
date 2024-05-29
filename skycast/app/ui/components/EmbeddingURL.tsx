@@ -34,7 +34,7 @@ export default function EmbeddingURL() {
             {copySuccess && (
                 <div className=" mr-5 text-green-500">{copySuccess}</div>
             )}
-            <button onClick={handleCopyClick} className="mt-2 mr-10 p-2 bg-blue-500 text-white rounded">
+            <button onClick={handleCopyClick} className="mt-2 mr-10 p-2 bg-skycast-IndigoDye text-white rounded">
                 Copy URL
             </button>
         </div>

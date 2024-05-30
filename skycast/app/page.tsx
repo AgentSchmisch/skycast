@@ -18,13 +18,15 @@ export default function Page() {
 
   const cities_austria = ["Vienna", "Linz", "Graz", "St. Pölten", "Salzburg", "Innsbruck"];
   const cities_germany = ["Munich", "Hamburg", "Berlin", "Dresden", "Cologne"];
+  const cities_all = ["Munich", "Hamburg", "Berlin", "Dresden", "Cologne", "Vienna", "Linz", "Graz", "St. Pölten", "Salzburg", "Innsbruck"];
 
   const [result, setResult] = useState("");
   
   // content inside <> assures type safety, thus only accepting an HTMLElement or null
   const mainRef = useRef<any>(null)
 
-  return (
+  // @ts-ignore
+    return (
     <main className="flex flex-col" ref={mainRef}>
       <LandingBanner />
       <NavBar target={mainRef} />
@@ -37,7 +39,7 @@ export default function Page() {
         <div className='flex flex-col w-full md:w-3/4'>
           <div className="flex flex-col md:flex-row justify-between items-center p-2">
             <h1 className="text-xl font-bold text-skycast-IndigoDye pb-2 md:pb-0">Our Weather Prediction</h1>
-            <SearchBar setResult={setResult}/>
+            <SearchBar setResult={setResult} cities={cities_all} />
           </div>
 
           <div>

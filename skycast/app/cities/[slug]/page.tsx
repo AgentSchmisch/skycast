@@ -21,6 +21,8 @@ export default function Page({ params }: { params: { slug: string } }) {
             try {
                 const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${decodeURI(params.slug)}&appid=${process.env.NEXT_PUBLIC_OPENWEATHER_API_KEY}&units=metric`);
                 const responseData = await response.json();
+                console.log(responseData);
+
                 setData(responseData);
             } catch (error) {
                 console.error("Error:", error);

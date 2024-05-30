@@ -12,16 +12,17 @@ export default function CitiesSearchbar({ setResult }: { setResult: any }) {
 
     const handleSearch = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        setSearchTerm(event.currentTarget.value);
+
+        const searchTextLower = searchText.toLowerCase();
 
         // Check if there is text in the search bar
         if (searchText === "") {
             // Show default results
-        } else if (cities_all.includes(searchText)) {
+        } else if (cities_all.map(city => city.toLowerCase()).includes(searchTextLower)) {
             // Redirect to the search result page
-            router.push(`/cities/${encodeURIComponent(searchText)}`);
+            router.push(`/cities/${encodeURIComponent(searchTextLower)}`);
+            setCityNotFound(false);
         } else {
-            // Display "No cities found" message
             setCityNotFound(true);
         }
     };

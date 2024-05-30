@@ -12,14 +12,16 @@ export default function SearchBar({ setResult, cities }: { setResult: any; citie
         event.preventDefault();
         setSearchTerm(event.currentTarget.value);
 
+        const searchTextLower = searchText.toLowerCase();
+
         // Check if there is text in the search bar
         if (searchText === "") {
             // Show default results
-        } else if (cities.includes(searchText)) {
+        } else if (cities.map(city => city.toLowerCase()).includes(searchTextLower)) {
             // Redirect to the search result page
-            router.push(`/cities/${encodeURIComponent(searchText)}`);
+            router.push(`/cities/${encodeURIComponent(searchTextLower)}`);
+            setCityNotFound(false);
         } else {
-            // Display "No cities found" message
             setCityNotFound(true);
         }
     };

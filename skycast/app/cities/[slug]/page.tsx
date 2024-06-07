@@ -34,9 +34,11 @@ export default function Page({ params }: { params: { slug: string } }) {
                 const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${decodeURI(params.slug)}&appid=${process.env.NEXT_PUBLIC_OPENWEATHER_API_KEY}&units=metric`);
                 const responseData = await response.json();
                 const grouped_prediction_object : any[] = [];
+
                 for (let i = 0; i < responseData.cnt; i++) {
                     if (grouped_prediction_object[responseData.list[i].dt_txt.split(" ")[0]] === undefined) {
                         grouped_prediction_object[responseData.list[i].dt_txt.split(" ")[0]] = [];
+                        grouped_prediction_object[responseData.list[i].dt_txt.split(" ")[0]].push({ "temp": responseData.list[i].main.temp, "icon": responseData.list[i].weather[0].icon, "date": responseData.list[i].dt_txt.split(" ")[0] });
                     }
                     else {
                         grouped_prediction_object[responseData.list[i].dt_txt.split(" ")[0]].push({ "temp": responseData.list[i].main.temp, "icon": responseData.list[i].weather[0].icon, "date": responseData.list[i].dt_txt.split(" ")[0] });
@@ -54,7 +56,6 @@ export default function Page({ params }: { params: { slug: string } }) {
                     //create an array from the data, so we can use the map function in the PredictionContainer
                     grouped_prediction_data.push({ "date": key, "temp": temp, "icon": grouped_prediction_object[key][0].icon});
                 }
-
                 setPrediction(grouped_prediction_data);
             } catch (error) {
                 console.error("Error:", error);
